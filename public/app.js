@@ -115,7 +115,14 @@ const VIOL = {
   segunda_demanda_ignorada: { t: "Segunda demanda da mensagem ignorada", sev: "warning", pol: null,
     d: "A mensagem traz dois problemas e a resposta trata só o primeiro. O cliente volta para perguntar de novo." },
   sem_resposta_humana: { t: "Cliente escreveu e ninguém respondeu", sev: "serious", pol: null, d: "Conversa sem nenhuma resposta de atendente." },
+  faltante_encerrado_sem_tratar: { t: "Item faltante respondido sem tratativa", sev: "serious", pol: "avaria_faltante",
+    d: "O atendente responde, mas não pede foto nem oferece reenvio. O cliente fica sem solução e volta a escrever." },
 };
+// Falha sem cadastro em VIOL (nova no pipeline) não pode quebrar a tela.
+const violInfo = (k) => VIOL[k] || { t: k, sev: "warning", pol: null, d: "" };
+// Ordem das falhas: gravidade primeiro (crítico → grave → atenção), depois volume de casos.
+const SEV_RANK = { critical: 0, serious: 1, warning: 2, good: 3 };
+const violOrdenadas = (v) => Object.entries(v).sort((a, b) => SEV_RANK[violInfo(a[0]).sev] - SEV_RANK[violInfo(b[0]).sev] || b[1] - a[1]);
 const SEV_ICON = { critical: "octagon", serious: "alert", warning: "alert", good: "check" };
 const SEV_LABEL = { critical: "Crítico", serious: "Grave", warning: "Atenção", good: "Ok" };
 const sevChip = (sev, label) => `<span class="chip chip-${sev}">${icon(SEV_ICON[sev], 12)}${esc(label || SEV_LABEL[sev])}</span>`;
@@ -134,6 +141,8 @@ const S = {
   motivoSel: null,
   F: { q: "", canal: "", tag: "", aut: "", flag: "", sort: "prio" },
   limit: 120,
+  detail: false,
+  filtersOpen: false,
   sel: null,
   runs: {},
   running: {},
@@ -287,7 +296,7 @@ const legendItem = (sw, label) => `<span><i class="swatch sw-${sw}"></i>${esc(la
 
 // Tooltip
 const tip = $("#tooltip");
-document.addEventListener("mousemove", (e) => {
+function showTip(e) {
   const t = e.target.closest && e.target.closest("[data-tt]");
   if (!t) return tip.classList.remove("show");
   let d;
@@ -300,7 +309,11 @@ document.addEventListener("mousemove", (e) => {
   if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
   tip.style.left = x + "px";
   tip.style.top = y + "px";
-});
+}
+document.addEventListener("mousemove", showTip);
+// No toque não há hover: tocar no dado mostra o tooltip, tocar fora (ou rolar) esconde.
+document.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") showTip(e); });
+addEventListener("scroll", () => tip.classList.remove("show"), { passive: true });
 
 function toast(msg) {
   const t = $("#toast");
@@ -384,9 +397,9 @@ function viewVisao() {
       <div class="card-title">O que o atendimento atual faz de errado</div>
       <div class="card-sub">${n0(viol)} respostas de atendentes violam uma política ou deixam o cliente sem resposta</div>
       <div class="table-wrap mt-16">${table(
-        [{ t: "Falha", html: (r) => `<span class="row">${sevChip(VIOL[r[0]].sev)}<span>${esc(VIOL[r[0]].t)}</span></span>` },
+        [{ t: "Falha", html: (r) => `<span class="row">${sevChip(violInfo(r[0]).sev)}<span>${esc(violInfo(r[0]).t)}</span></span>` },
          { t: "Casos", r: 1, v: (r) => `${n0(r[1])} de ${n0(A.auditoria.aplicaveis[r[0]])}` }],
-        Object.entries(A.auditoria.violacoes).sort((a, b) => b[1] - a[1]).slice(0, 5)
+        violOrdenadas(A.auditoria.violacoes)
       )}</div>
       <div class="mt-16"><a href="#/qualidade">Ver a auditoria completa</a></div>
     </div>
@@ -430,7 +443,7 @@ function viewMotivos() {
   <div class="grid g-main">
     ${chartCard("motivos", S.metric === "custo" ? "Custo por motivo" : "Conversas por motivo", "Clique em um motivo para ver o detalhe", tabela, { extra: seg,
       foot: `Custo por conversa: WhatsApp ${brl2(4.8)}, e-mail ${brl2(7.2)}, Reclame Aqui ${brl2(42)}. Amostra de 90 dias ≈ 1 mês da população.` })}
-    <div class="card">
+    <div class="card" id="motivo-detail">
       <div class="card-head"><div><div class="card-title">${esc(tagLabel(sel.tag))}</div>
         <div class="card-sub">${n0(sel.conversas)} conversas · ${brl(sel.custo)} · ${pct(sel.pct_custo)} do custo</div></div></div>
       <div class="card-body stack">
@@ -708,7 +721,7 @@ function drawCausa() {
 // ---------------------------------------------------------------------------------------------
 function viewQualidade() {
   const A = S.A, au = A.auditoria, k = A.kpis, N = A.metadata.conversas_amostra;
-  const viol = Object.entries(au.violacoes).sort((a, b) => b[1] - a[1]);
+  const viol = violOrdenadas(au.violacoes);
   const st = S.status;
   const req = [
     { ok: true, t: "Claude Code como ferramenta principal", d: "Pipeline, motor do agente e frontend escritos e auditados com Claude Code." },
@@ -729,7 +742,7 @@ function viewQualidade() {
   <div class="card">
     <div class="card-head"><div><div class="card-title">Auditoria das respostas dos atendentes</div><div class="card-sub">Clique em um exemplo para abrir a conversa na fila</div></div></div>
     <div class="card-body">${table(
-      [{ t: "Falha", html: (r) => `<div class="row">${sevChip(VIOL[r[0]].sev)}<b>${esc(VIOL[r[0]].t)}</b></div><div class="muted mt-4">${esc(VIOL[r[0]].d)}</div>` },
+      [{ t: "Falha", html: (r) => `<div class="row">${sevChip(violInfo(r[0]).sev)}<b>${esc(violInfo(r[0]).t)}</b></div><div class="muted mt-4">${esc(violInfo(r[0]).d)}</div>` },
        { t: "Casos", r: 1, html: (r) => `<b>${n0(r[1])}</b><div class="muted">de ${n0(au.aplicaveis[r[0]])}</div>` },
        { t: "Exemplos", html: (r) => (au.exemplos[r[0]] || []).slice(0, 3).map((id) => `<a href="#/fila?id=${esc(id)}" class="mono">${esc(id)}</a>`).join(" ") }],
       viol
@@ -876,10 +889,15 @@ function viewFila() {
   if (!S.Q) return `<div class="empty"><span class="spinner"></span><div>Carregando ${n0(S.A.metadata.conversas_amostra)} conversas</div></div>`;
   const tags = [...new Set(S.Q.map((x) => x.tag))].sort();
   const F = S.F;
-  return `<div class="inbox">
+  const ativos = ["canal", "tag", "aut", "flag"].filter((k) => F[k]).length + (F.sort !== "prio" ? 1 : 0);
+  return `<div class="inbox ${S.detail ? "show-detail" : ""}">
     <section class="inbox-list" aria-label="Conversas">
-      <div class="inbox-filters">
-        <input class="input" type="search" id="f-q" placeholder="Buscar por conversa, pedido ou texto" value="${esc(F.q)}" aria-label="Buscar">
+      <div class="inbox-filters ${S.filtersOpen ? "open" : ""}">
+        <div class="row filter-top">
+          <input class="input" type="search" id="f-q" placeholder="Buscar por conversa, pedido ou texto" value="${esc(F.q)}" aria-label="Buscar">
+          <button class="btn filters-toggle" id="filters-toggle" aria-expanded="${S.filtersOpen}" aria-controls="filters-more">Filtros${ativos ? ` · ${ativos}` : ""}</button>
+        </div>
+        <div class="filters-more" id="filters-more">
         <div class="row">
           <select class="select" id="f-canal" aria-label="Canal"><option value="">Todos os canais</option>${Object.entries(CANAL).map(([k, v]) => `<option value="${k}" ${F.canal === k ? "selected" : ""}>${v}</option>`).join("")}</select>
           <select class="select" id="f-aut" aria-label="Autonomia"><option value="">Toda autonomia</option>${Object.entries(AUT).map(([k, v]) => `<option value="${k}" ${F.aut === k ? "selected" : ""}>${v.t}</option>`).join("")}</select>
@@ -889,6 +907,7 @@ function viewFila() {
           <select class="select" id="f-sort" aria-label="Ordenar"><option value="prio" ${F.sort === "prio" ? "selected" : ""}>Prioridade</option><option value="recentes" ${F.sort === "recentes" ? "selected" : ""}>Mais recentes</option></select>
         </div>
         <div class="row flag-row">${FLAGS.map((f) => `<button class="chip chip-filter" data-flag="${f.k}" aria-pressed="${F.flag === f.k}">${esc(f.t)}</button>`).join("")}</div>
+        </div>
       </div>
       <div class="inbox-count" id="inbox-count"></div>
       <div class="conv-list" id="conv-list" role="listbox" aria-label="Lista de conversas"></div>
@@ -935,6 +954,7 @@ function drawThread() {
   const v = x.flags.violacoes;
   th.innerHTML = `
     <div class="thread-head">
+      <button class="btn btn-sm btn-ghost back-btn" id="back-btn" aria-label="Voltar para a lista">${icon("chevron", 14)}Conversas</button>
       <div class="thread-title"><h2>${esc(x.id)}</h2><span class="chip">${esc(CANAL[x.canal])}</span><span class="chip">${esc(x.marca)}</span>
         <span class="chip">${esc(x.status)}</span><span class="spacer"></span><span class="muted">${esc(dt(x.abertura))}</span></div>
       <div class="order-strip">
@@ -947,7 +967,7 @@ function drawThread() {
       ${x.msgs.map((m) => `<div class="msg msg-${m[0]}"><div class="msg-meta">${esc(m[0] === "cliente" ? "Cliente" : m[0] === "bot" ? "Bot" : "Atendente")} · ${esc(dt(m[1]))}</div><div class="msg-text">${highlightMask(m[2])}</div></div>`).join("")}
       ${res?.ok ? `<div class="msg msg-ia"><div class="msg-meta">Rascunho do agente · ${esc(AUT[res.autonomia].t)}</div><div class="msg-text">${esc(S.draft[x.id] ?? res.resposta)}</div></div>` : ""}
     </div>
-    ${v.length ? `<div class="audit callout callout-warning">${icon("alert")}<div><strong>Auditoria do atendimento:</strong> ${v.map((k) => esc(VIOL[k]?.t || k)).join("; ")}.</div></div>` : ""}`;
+    ${v.length ? `<div class="audit callout callout-warning">${icon("alert")}<div><strong>Auditoria do atendimento:</strong> ${v.map((k) => esc(violInfo(k).t)).join("; ")}.</div></div>` : ""}`;
   th.querySelector(".thread-body").scrollTop = 1e6;
 
   const running = S.running[x.id];
@@ -1107,11 +1127,25 @@ function countUp(el) {
   };
   requestAnimationFrame(tick);
 }
+// Mobile (≤ 860px): lista e conversa viram telas separadas, como num app de mensagens.
+const MOBILE = matchMedia("(max-width: 860px)");
+const STACKED = matchMedia("(max-width: 1080px)");
+function openDetail() {
+  S.detail = true;
+  $(".inbox")?.classList.add("show-detail");
+  if (MOBILE.matches) window.scrollTo(0, 0);
+}
+function closeDetail() {
+  S.detail = false;
+  $(".inbox")?.classList.remove("show-detail");
+  $(`.conv-item[data-id="${S.sel}"]`)?.scrollIntoView({ block: "center" });
+}
 async function onRoute() {
   const { route, params } = parseHash();
   const changed = route !== S.route;
   S.route = route;
-  if (route === "fila" && params.get("id")) { S.sel = params.get("id"); S.F = { q: "", canal: "", tag: "", aut: "", flag: "", sort: "prio" }; }
+  if (route === "fila" && params.get("id")) { S.sel = params.get("id"); S.detail = true; S.F = { q: "", canal: "", tag: "", aut: "", flag: "", sort: "prio" }; }
+  else if (route === "fila" && changed) S.detail = false;
   render();
   if (changed) { window.scrollTo(0, 0); enter(); }
   if (route === "fila" && !S.Q) {
@@ -1132,8 +1166,18 @@ document.addEventListener("click", (e) => {
     $("#ch-" + id).classList.toggle("hidden", t.dataset.view !== "chart");
     $("#tb-" + id).classList.toggle("hidden", t.dataset.view !== "table");
   } else if (t.dataset.metric) { S.metric = t.dataset.metric; render(); }
-  else if (t.dataset.key && S.route === "motivos") { S.motivoSel = t.dataset.key; render(); }
-  else if (t.classList.contains("conv-item")) { S.sel = t.dataset.id; $$(".conv-item").forEach((c) => c.setAttribute("aria-selected", c === t)); drawThread(); }
+  else if (t.dataset.key && S.route === "motivos") {
+    S.motivoSel = t.dataset.key; render();
+    // Empilhado (≤ 1080px), o detalhe fica abaixo do gráfico: leva a pessoa até ele.
+    const det = $("#motivo-detail");
+    if (STACKED.matches && det) {
+      const top = det.getBoundingClientRect().top + scrollY - $(".topnav").offsetHeight - 12;
+      window.scrollTo({ top, behavior: REDUCED.matches ? "auto" : "smooth" });
+    }
+  }
+  else if (t.classList.contains("conv-item")) { S.sel = t.dataset.id; $$(".conv-item").forEach((c) => c.setAttribute("aria-selected", c === t)); drawThread(); openDetail(); }
+  else if (t.id === "back-btn") closeDetail();
+  else if (t.id === "filters-toggle") { S.filtersOpen = !S.filtersOpen; t.closest(".inbox-filters").classList.toggle("open", S.filtersOpen); t.setAttribute("aria-expanded", S.filtersOpen); }
   else if (t.dataset.flag) { S.F.flag = S.F.flag === t.dataset.flag ? "" : t.dataset.flag; S.limit = 120; S.sel = null; render(); }
   else if (t.id === "more-btn") { S.limit += 120; drawFila(); }
   else if (t.id === "run-btn") runAgent(S.sel);
