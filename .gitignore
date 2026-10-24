@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+.vercel/
+.DS_Store
+
+# Dados brutos do desafio: o enunciado pede para não compartilhá-los
+data/raw/

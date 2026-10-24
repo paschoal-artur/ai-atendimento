@@ -1,0 +1,1347 @@
+{
+ "metadata": {
+  "periodo": "02/07/2026 a 29/09/2026",
+  "dias": 90,
+  "data_extracao": "30/09/2026",
+  "fator_amostra": 3,
+  "conversas_amostra": 4000,
+  "mensagens_amostra": 14559,
+  "pedidos_amostra": 3237,
+  "clientes_amostra": 1966,
+  "clientes_com_mais_de_uma_conversa": 1026,
+  "pedidos_faturados_90d": 166000,
+  "taxa_contato_pct": 7.2,
+  "gerado_em": "2026-10-23 22:20"
+ },
+ "kpis": {
+  "custo_amostra": 36099.6,
+  "conversas_fora_horario": 1212,
+  "conversas_sem_mensagem": 459,
+  "multi_demanda": 342,
+  "recontato_mesmo_pedido": 763,
+  "recontato_explicito": 673,
+  "reabertos": 355,
+  "pendentes": 982,
+  "cosmetovigilancia": 40,
+  "prompt_injection": 6,
+  "conversas_com_pii": 310,
+  "divergencia_tag": 1095,
+  "tag_vazia_ou_outros": 556,
+  "vazamentos_total": 139
+ },
+ "motivos": [
+  {
+   "tag": "Rastreio",
+   "conversas": 871,
+   "pct_conversas": 21.8,
+   "demandas": 903,
+   "custo": 7459.2,
+   "pct_custo": 20.7,
+   "tag_agente": 676,
+   "reclame_aqui": 76,
+   "reabertos": 81,
+   "pendentes": 222,
+   "recontato_pedido": 242,
+   "subcategorias": [
+    {
+     "nome": "Rastreio Sem Atualização / Em Trânsito Longo",
+     "conversas": 441,
+     "custo": 3667.2,
+     "autonomia": "autonomo"
+    },
+    {
+     "nome": "Solicitação de Código/Status de Rastreio",
+     "conversas": 328,
+     "custo": 2761.2,
+     "autonomia": "autonomo"
+    },
+    {
+     "nome": "Pedido Parado em Hub Regional",
+     "conversas": 102,
+     "custo": 1030.8,
+     "autonomia": "autonomo"
+    }
+   ]
+  },
+  {
+   "tag": "Atraso",
+   "conversas": 498,
+   "pct_conversas": 12.4,
+   "demandas": 535,
+   "custo": 6120.0,
+   "pct_custo": 17.0,
+   "tag_agente": 450,
+   "reclame_aqui": 94,
+   "reabertos": 52,
+   "pendentes": 135,
+   "recontato_pedido": 131,
+   "subcategorias": [
+    {
+     "nome": "SLA de Entrega Estourado",
+     "conversas": 330,
+     "custo": 4036.8,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Atraso Crítico (>10 dias / Recorrente)",
+     "conversas": 168,
+     "custo": 2083.2,
+     "autonomia": "aprovacao"
+    }
+   ]
+  },
+  {
+   "tag": "Avaria",
+   "conversas": 431,
+   "pct_conversas": 10.8,
+   "demandas": 461,
+   "custo": 3727.2,
+   "pct_custo": 10.3,
+   "tag_agente": 319,
+   "reclame_aqui": 38,
+   "reabertos": 47,
+   "pendentes": 110,
+   "recontato_pedido": 99,
+   "subcategorias": [
+    {
+     "nome": "Dano Físico no Transporte / Quebra",
+     "conversas": 156,
+     "custo": 1407.6,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Vazamento de Cosmético (Lote/Embalagem)",
+     "conversas": 139,
+     "custo": 1153.2,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Erro de Personalização Gocase",
+     "conversas": 136,
+     "custo": 1166.4,
+     "autonomia": "aprovacao"
+    }
+   ]
+  },
+  {
+   "tag": "Produto faltando",
+   "conversas": 429,
+   "pct_conversas": 10.7,
+   "demandas": 455,
+   "custo": 3626.4,
+   "pct_custo": 10.0,
+   "tag_agente": 388,
+   "reclame_aqui": 36,
+   "reabertos": 39,
+   "pendentes": 130,
+   "recontato_pedido": 124,
+   "subcategorias": [
+    {
+     "nome": "Item Principal / Kit Incompleto",
+     "conversas": 274,
+     "custo": 2049.6,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Falta de Brinde Promocional",
+     "conversas": 155,
+     "custo": 1576.8,
+     "autonomia": "aprovacao"
+    }
+   ]
+  },
+  {
+   "tag": "Financeiro",
+   "conversas": 245,
+   "pct_conversas": 6.1,
+   "demandas": 276,
+   "custo": 3285.6,
+   "pct_custo": 9.1,
+   "tag_agente": 263,
+   "reclame_aqui": 54,
+   "reabertos": 22,
+   "pendentes": 67,
+   "recontato_pedido": 77,
+   "subcategorias": [
+    {
+     "nome": "Cobrança Duplicada (Cartão / Pix / Boleto)",
+     "conversas": 183,
+     "custo": 2664.0,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Pagamento Não Conciliado (Pix / Boleto)",
+     "conversas": 62,
+     "custo": 621.6,
+     "autonomia": "aprovacao"
+    }
+   ]
+  },
+  {
+   "tag": "Sem mensagem",
+   "conversas": 459,
+   "pct_conversas": 11.5,
+   "demandas": 459,
+   "custo": 2203.2,
+   "pct_custo": 6.1,
+   "tag_agente": 0,
+   "reclame_aqui": 0,
+   "reabertos": 0,
+   "pendentes": 0,
+   "recontato_pedido": 90,
+   "subcategorias": [
+    {
+     "nome": "Abandono no Bot (Sem Resposta do Cliente)",
+     "conversas": 459,
+     "custo": 2203.2,
+     "autonomia": "autonomo"
+    }
+   ]
+  },
+  {
+   "tag": "Cancelamento",
+   "conversas": 221,
+   "pct_conversas": 5.5,
+   "demandas": 256,
+   "custo": 1968.0,
+   "pct_custo": 5.5,
+   "tag_agente": 223,
+   "reclame_aqui": 22,
+   "reabertos": 20,
+   "pendentes": 68,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Arrependimento / Pedido Duplicado pelo Cliente",
+     "conversas": 221,
+     "custo": 1968.0,
+     "autonomia": "autonomo"
+    }
+   ]
+  },
+  {
+   "tag": "Dúvida",
+   "conversas": 212,
+   "pct_conversas": 5.3,
+   "demandas": 235,
+   "custo": 1839.6,
+   "pct_custo": 5.1,
+   "tag_agente": 239,
+   "reclame_aqui": 19,
+   "reabertos": 32,
+   "pendentes": 69,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Dúvida Técnica / Pré-Venda de Produto",
+     "conversas": 212,
+     "custo": 1839.6,
+     "autonomia": "autonomo"
+    }
+   ]
+  },
+  {
+   "tag": "Reclamação produto",
+   "conversas": 185,
+   "pct_conversas": 4.6,
+   "demandas": 210,
+   "custo": 1718.4,
+   "pct_custo": 4.8,
+   "tag_agente": 228,
+   "reclame_aqui": 20,
+   "reabertos": 16,
+   "pendentes": 50,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Insatisfação com Fragrância / Fixação",
+     "conversas": 145,
+     "custo": 1284.0,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Reação Adversa (Cosmetovigilância)",
+     "conversas": 40,
+     "custo": 434.4,
+     "autonomia": "humano"
+    }
+   ]
+  },
+  {
+   "tag": "Troca",
+   "conversas": 154,
+   "pct_conversas": 3.9,
+   "demandas": 180,
+   "custo": 1483.2,
+   "pct_custo": 4.1,
+   "tag_agente": 214,
+   "reclame_aqui": 18,
+   "reabertos": 16,
+   "pendentes": 51,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Troca / Devolução de Produto",
+     "conversas": 119,
+     "custo": 1156.8,
+     "autonomia": "aprovacao"
+    },
+    {
+     "nome": "Troca por Erro de Escolha (Tamanho/Modelo/Cor)",
+     "conversas": 35,
+     "custo": 326.4,
+     "autonomia": "autonomo"
+    }
+   ]
+  },
+  {
+   "tag": "Promoção",
+   "conversas": 137,
+   "pct_conversas": 3.4,
+   "demandas": 169,
+   "custo": 1312.8,
+   "pct_custo": 3.6,
+   "tag_agente": 178,
+   "reclame_aqui": 16,
+   "reabertos": 14,
+   "pendentes": 32,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Falha de Cupom / Cashback / Frete Grátis",
+     "conversas": 137,
+     "custo": 1312.8,
+     "autonomia": "aprovacao"
+    }
+   ]
+  },
+  {
+   "tag": "Endereço",
+   "conversas": 115,
+   "pct_conversas": 2.9,
+   "demandas": 160,
+   "custo": 946.8,
+   "pct_custo": 2.6,
+   "tag_agente": 159,
+   "reclame_aqui": 9,
+   "reabertos": 13,
+   "pendentes": 30,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Alteração Cadastral de Endereço",
+     "conversas": 115,
+     "custo": 946.8,
+     "autonomia": "autonomo"
+    }
+   ]
+  },
+  {
+   "tag": "Elogio",
+   "conversas": 43,
+   "pct_conversas": 1.1,
+   "demandas": 43,
+   "custo": 409.2,
+   "pct_custo": 1.1,
+   "tag_agente": 107,
+   "reclame_aqui": 5,
+   "reabertos": 3,
+   "pendentes": 18,
+   "recontato_pedido": 0,
+   "subcategorias": [
+    {
+     "nome": "Elogio / Promotor da Marca",
+     "conversas": 43,
+     "custo": 409.2,
+     "autonomia": "autonomo"
+    }
+   ]
+  }
+ ],
+ "canais": [
+  {
+   "canal": "whatsapp",
+   "conversas": 2860,
+   "pct_conversas": 71.5,
+   "custo_unit": 4.8,
+   "custo": 13728.0,
+   "pct_custo": 38.0,
+   "sla": "30 min (8h–20h)",
+   "com_resposta": 2398,
+   "sla_estourado": 484,
+   "pct_sla_estourado": 20.2,
+   "p50_resposta_min": 11.8,
+   "fora_horario": 875,
+   "sem_resposta_humana": 3
+  },
+  {
+   "canal": "email",
+   "conversas": 733,
+   "pct_conversas": 18.3,
+   "custo_unit": 7.2,
+   "custo": 5277.6,
+   "pct_custo": 14.6,
+   "sla": "24 h",
+   "com_resposta": 732,
+   "sla_estourado": 45,
+   "pct_sla_estourado": 6.1,
+   "p50_resposta_min": 643.0,
+   "fora_horario": 215,
+   "sem_resposta_humana": 1
+  },
+  {
+   "canal": "reclame_aqui",
+   "conversas": 407,
+   "pct_conversas": 10.2,
+   "custo_unit": 42.0,
+   "custo": 17094.0,
+   "pct_custo": 47.4,
+   "sla": "48 h",
+   "com_resposta": 405,
+   "sla_estourado": 46,
+   "pct_sla_estourado": 11.4,
+   "p50_resposta_min": 1255.8,
+   "fora_horario": 122,
+   "sem_resposta_humana": 2
+  }
+ ],
+ "tendencia": [
+  {
+   "mes": "Jul",
+   "total": 966,
+   "por_tag": {
+    "Financeiro": 78,
+    "Atraso": 106,
+    "Cancelamento": 76,
+    "Avaria": 84,
+    "Sem mensagem": 116,
+    "Rastreio": 131,
+    "Produto faltando": 65,
+    "Dúvida": 89,
+    "Promoção": 49,
+    "Elogio": 22,
+    "Reclamação produto": 61,
+    "Endereço": 33,
+    "Troca": 56
+   },
+   "brinde_faltando": 26
+  },
+  {
+   "mes": "Ago",
+   "total": 1408,
+   "por_tag": {
+    "Financeiro": 97,
+    "Promoção": 49,
+    "Produto faltando": 51,
+    "Atraso": 178,
+    "Sem mensagem": 181,
+    "Endereço": 40,
+    "Rastreio": 341,
+    "Reclamação produto": 58,
+    "Dúvida": 69,
+    "Troca": 56,
+    "Avaria": 201,
+    "Cancelamento": 75,
+    "Elogio": 12
+   },
+   "brinde_faltando": 20
+  },
+  {
+   "mes": "Set",
+   "total": 1626,
+   "por_tag": {
+    "Atraso": 214,
+    "Rastreio": 399,
+    "Avaria": 146,
+    "Financeiro": 70,
+    "Cancelamento": 70,
+    "Produto faltando": 313,
+    "Endereço": 42,
+    "Sem mensagem": 162,
+    "Troca": 42,
+    "Promoção": 39,
+    "Reclamação produto": 66,
+    "Dúvida": 54,
+    "Elogio": 9
+   },
+   "brinde_faltando": 121
+  }
+ ],
+ "frentes": [
+  {
+   "id": "logistica",
+   "nome": "Rastreio e atraso de entrega",
+   "dono": "Logística",
+   "acao": "Aviso proativo a cada movimentação e SLA contratual com a Rota Express",
+   "conversas": 1369,
+   "custo": 13579.2,
+   "pct_custo": 37.6,
+   "reclame_aqui": 170,
+   "pct_nao_resolvido": 54.5,
+   "score": 20978.82
+  },
+  {
+   "id": "autosservico",
+   "nome": "Cancelamento, endereço, troca, cupom e dúvida",
+   "dono": "CX Digital",
+   "acao": "Autoatendimento com o agente: as políticas são determinísticas",
+   "conversas": 839,
+   "custo": 7550.4,
+   "pct_custo": 20.9,
+   "reclame_aqui": 84,
+   "pct_nao_resolvido": 41.1,
+   "score": 10655.15
+  },
+  {
+   "id": "fulfillment",
+   "nome": "Item e brinde faltando",
+   "dono": "CD / Fulfillment",
+   "acao": "Conferência do brinde no picking da campanha e foto obrigatória antes do reenvio",
+   "conversas": 429,
+   "custo": 3626.4,
+   "pct_custo": 10.0,
+   "reclame_aqui": 36,
+   "pct_nao_resolvido": 58.0,
+   "score": 5731.23
+  },
+  {
+   "id": "qualidade",
+   "nome": "Avaria, vazamento e personalização",
+   "dono": "Qualidade / Produção Gocase",
+   "acao": "Trocar a tampa do APC-1067 e inspecionar impressão antes da expedição",
+   "conversas": 431,
+   "custo": 3727.2,
+   "pct_custo": 10.3,
+   "reclame_aqui": 38,
+   "pct_nao_resolvido": 50.8,
+   "score": 5621.07
+  },
+  {
+   "id": "financeiro",
+   "nome": "Cobrança duplicada e Pix não conciliado",
+   "dono": "Pagamentos",
+   "acao": "Idempotência no checkout e conciliação automática de Pix",
+   "conversas": 245,
+   "custo": 3285.6,
+   "pct_custo": 9.1,
+   "reclame_aqui": 54,
+   "pct_nao_resolvido": 55.1,
+   "score": 5096.03
+  },
+  {
+   "id": "bot",
+   "nome": "Conversas vazias no bot",
+   "dono": "CX / Bot",
+   "acao": "Encerrar automaticamente e tirar da contagem de contatos",
+   "conversas": 459,
+   "custo": 2203.2,
+   "pct_custo": 6.1,
+   "reclame_aqui": 0,
+   "pct_nao_resolvido": 19.6,
+   "score": 2635.2
+  },
+  {
+   "id": "fragrancia",
+   "nome": "Insatisfação com fragrância",
+   "dono": "CX / GoBeauté",
+   "acao": "Aplicar a política de troca (hoje 100% recebem cupom)",
+   "conversas": 145,
+   "custo": 1284.0,
+   "pct_custo": 3.6,
+   "reclame_aqui": 14,
+   "pct_nao_resolvido": 36.6,
+   "score": 1753.32
+  }
+ ],
+ "risco_prioritario": {
+  "nome": "Reação adversa sem protocolo de cosmetovigilância",
+  "dono": "Responsável técnica",
+  "acao": "Protocolo automático em 100% dos relatos; troca deixa de ser oferecida como solução",
+  "conversas": 40,
+  "sem_protocolo": 40,
+  "custo": 434.4
+ },
+ "q3": {
+  "eliminavel": {
+   "conversas": 2344,
+   "custo": 21646.8,
+   "itens": [
+    {
+     "motivo": "\"Onde está meu pedido?\" com pedido em trânsito",
+     "conversas": 871,
+     "custo": 7459.2
+    },
+    {
+     "motivo": "Autoatendimento (dúvida, endereço, cancelamento, troca)",
+     "conversas": 583,
+     "custo": 5080.8
+    },
+    {
+     "motivo": "Conversa vazia (cliente não escreveu)",
+     "conversas": 459,
+     "custo": 2203.2
+    },
+    {
+     "motivo": "Recontato sobre o mesmo pedido",
+     "conversas": 431,
+     "custo": 6903.6
+    }
+   ]
+  },
+  "evitavel": {
+   "conversas": 1309,
+   "custo": 11168.4,
+   "itens": [
+    {
+     "motivo": "Atraso da transportadora",
+     "conversas": 367,
+     "custo": 2997.6
+    },
+    {
+     "motivo": "Avaria, vazamento e personalização",
+     "conversas": 332,
+     "custo": 2924.4
+    },
+    {
+     "motivo": "Pagamento e cupom",
+     "conversas": 305,
+     "custo": 2828.4
+    },
+    {
+     "motivo": "Falha de separação / brinde",
+     "conversas": 305,
+     "custo": 2418.0
+    }
+   ]
+  },
+  "legitimo": {
+   "conversas": 347,
+   "custo": 3284.4,
+   "itens": [
+    {
+     "motivo": "Atendimento necessário",
+     "conversas": 347,
+     "custo": 3284.4
+    }
+   ]
+  }
+ },
+ "q4": {
+  "cruzamento": {
+   "evitavel|aprovacao": {
+    "conversas": 1309,
+    "custo": 11168.4,
+    "reclame_aqui": 113
+   },
+   "eliminavel|aprovacao": {
+    "conversas": 901,
+    "custo": 14178.0,
+    "reclame_aqui": 255
+   },
+   "eliminavel|autonomo": {
+    "conversas": 1443,
+    "custo": 7468.8,
+    "reclame_aqui": 0
+   },
+   "legitimo|aprovacao": {
+    "conversas": 271,
+    "custo": 2660.4,
+    "reclame_aqui": 33
+   },
+   "legitimo|autonomo": {
+    "conversas": 36,
+    "custo": 189.6,
+    "reclame_aqui": 0
+   },
+   "legitimo|humano": {
+    "conversas": 40,
+    "custo": 434.4,
+    "reclame_aqui": 6
+   }
+  },
+  "niveis": {
+   "aprovacao": {
+    "conversas": 2481,
+    "custo": 28006.8,
+    "pct": 62.0
+   },
+   "autonomo": {
+    "conversas": 1479,
+    "custo": 7658.4,
+    "pct": 37.0
+   },
+   "humano": {
+    "conversas": 40,
+    "custo": 434.4,
+    "pct": 1.0
+   }
+  },
+  "acoes": {
+   "escalonamento": 1558,
+   "solicitar_evidencia": 1301,
+   "chamado_transportadora": 1099,
+   "rastreio_proativo": 903,
+   "reenvio": 776,
+   "logistica_reversa": 470,
+   "encerramento": 459,
+   "analise_financeira": 274,
+   "alerta_qualidade": 191,
+   "alteracao_endereco": 160,
+   "nova_producao": 140,
+   "cancelamento": 136,
+   "protocolo_cosmetovigilancia": 40
+  },
+  "motivos_escalonamento": {
+   "Liberação com custo de produto: uma pessoa valida a foto e aprova": 883,
+   "Atraso: decidir reenvio ou reembolso se não houver entrega em 48h": 506,
+   "Movimentação de dinheiro: o Financeiro confirma no gateway": 255,
+   "Sem ficha técnica cadastrada: o agente não inventa informação de produto": 221,
+   "Troca fora da janela verificável: pessoa confirma o prazo": 204,
+   "Validar cupom/cashback/frete e aplicar compensação": 152,
+   "Resposta pública: revisar antes de publicar": 98,
+   "Fragrância: validar foto (máx. 20% usado) e aprovar troca": 59
+  },
+  "por_subcategoria": [
+   {
+    "subcategoria": "Abandono no Bot (Sem Resposta do Cliente)",
+    "autonomia": "autonomo",
+    "conversas": 459
+   },
+   {
+    "subcategoria": "Solicitação de Código/Status de Rastreio",
+    "autonomia": "autonomo",
+    "conversas": 328
+   },
+   {
+    "subcategoria": "Rastreio Sem Atualização / Em Trânsito Longo",
+    "autonomia": "autonomo",
+    "conversas": 441
+   },
+   {
+    "subcategoria": "Pedido Parado em Hub Regional",
+    "autonomia": "autonomo",
+    "conversas": 102
+   },
+   {
+    "subcategoria": "Alteração Cadastral de Endereço",
+    "autonomia": "autonomo",
+    "conversas": 115
+   },
+   {
+    "subcategoria": "Arrependimento / Pedido Duplicado pelo Cliente",
+    "autonomia": "autonomo",
+    "conversas": 221
+   },
+   {
+    "subcategoria": "Troca por Erro de Escolha (Tamanho/Modelo/Cor)",
+    "autonomia": "autonomo",
+    "conversas": 35
+   },
+   {
+    "subcategoria": "Elogio / Promotor da Marca",
+    "autonomia": "autonomo",
+    "conversas": 43
+   },
+   {
+    "subcategoria": "Dúvida Técnica / Pré-Venda de Produto",
+    "autonomia": "autonomo",
+    "conversas": 212
+   },
+   {
+    "subcategoria": "SLA de Entrega Estourado",
+    "autonomia": "aprovacao",
+    "conversas": 330
+   },
+   {
+    "subcategoria": "Atraso Crítico (>10 dias / Recorrente)",
+    "autonomia": "aprovacao",
+    "conversas": 168
+   },
+   {
+    "subcategoria": "Item Principal / Kit Incompleto",
+    "autonomia": "aprovacao",
+    "conversas": 274
+   },
+   {
+    "subcategoria": "Falta de Brinde Promocional",
+    "autonomia": "aprovacao",
+    "conversas": 155
+   },
+   {
+    "subcategoria": "Dano Físico no Transporte / Quebra",
+    "autonomia": "aprovacao",
+    "conversas": 156
+   },
+   {
+    "subcategoria": "Vazamento de Cosmético (Lote/Embalagem)",
+    "autonomia": "aprovacao",
+    "conversas": 139
+   },
+   {
+    "subcategoria": "Erro de Personalização Gocase",
+    "autonomia": "aprovacao",
+    "conversas": 136
+   },
+   {
+    "subcategoria": "Insatisfação com Fragrância / Fixação",
+    "autonomia": "aprovacao",
+    "conversas": 145
+   },
+   {
+    "subcategoria": "Cobrança Duplicada (Cartão / Pix / Boleto)",
+    "autonomia": "aprovacao",
+    "conversas": 183
+   },
+   {
+    "subcategoria": "Pagamento Não Conciliado (Pix / Boleto)",
+    "autonomia": "aprovacao",
+    "conversas": 62
+   },
+   {
+    "subcategoria": "Falha de Cupom / Cashback / Frete Grátis",
+    "autonomia": "aprovacao",
+    "conversas": 137
+   },
+   {
+    "subcategoria": "Troca / Devolução de Produto",
+    "autonomia": "aprovacao",
+    "conversas": 119
+   },
+   {
+    "subcategoria": "Reação Adversa (Cosmetovigilância)",
+    "autonomia": "humano",
+    "conversas": 40
+   }
+  ]
+ },
+ "transportadoras": [
+  {
+   "nome": "Rota Express",
+   "pedidos": 1119,
+   "conversas": 1442,
+   "conversas_logistica": 862,
+   "custo": 13944.0,
+   "atrasado": 86,
+   "em_transito": 639,
+   "entregue": 335,
+   "logistica_por_100_pedidos": 77.0,
+   "top_ufs_logistica": [
+    [
+     "CE",
+     190
+    ],
+    [
+     "PE",
+     151
+    ],
+    [
+     "RN",
+     150
+    ],
+    [
+     "BA",
+     144
+    ],
+    [
+     "PB",
+     127
+    ]
+   ]
+  },
+  {
+   "nome": "Veloz Log",
+   "pedidos": 523,
+   "conversas": 638,
+   "conversas_logistica": 131,
+   "custo": 5412.0,
+   "atrasado": 12,
+   "em_transito": 112,
+   "entregue": 345,
+   "logistica_por_100_pedidos": 25.0,
+   "top_ufs_logistica": [
+    [
+     "SP",
+     33
+    ],
+    [
+     "BA",
+     11
+    ],
+    [
+     "MG",
+     10
+    ],
+    [
+     "CE",
+     8
+    ],
+    [
+     "PA",
+     8
+    ]
+   ]
+  },
+  {
+   "nome": "Postal Nacional",
+   "pedidos": 546,
+   "conversas": 663,
+   "conversas_logistica": 131,
+   "custo": 5887.2,
+   "atrasado": 15,
+   "em_transito": 105,
+   "entregue": 376,
+   "logistica_por_100_pedidos": 24.0,
+   "top_ufs_logistica": [
+    [
+     "SP",
+     28
+    ],
+    [
+     "RS",
+     14
+    ],
+    [
+     "MA",
+     10
+    ],
+    [
+     "PR",
+     9
+    ],
+    [
+     "RJ",
+     9
+    ]
+   ]
+  },
+  {
+   "nome": "Entrega Já",
+   "pedidos": 517,
+   "conversas": 630,
+   "conversas_logistica": 127,
+   "custo": 5378.4,
+   "atrasado": 14,
+   "em_transito": 102,
+   "entregue": 342,
+   "logistica_por_100_pedidos": 24.6,
+   "top_ufs_logistica": [
+    [
+     "SP",
+     34
+    ],
+    [
+     "BA",
+     17
+    ],
+    [
+     "SC",
+     13
+    ],
+    [
+     "CE",
+     12
+    ],
+    [
+     "PR",
+     9
+    ]
+   ]
+  },
+  {
+   "nome": "Carga Norte",
+   "pedidos": 532,
+   "conversas": 627,
+   "conversas_logistica": 118,
+   "custo": 5478.0,
+   "atrasado": 11,
+   "em_transito": 100,
+   "entregue": 342,
+   "logistica_por_100_pedidos": 22.2,
+   "top_ufs_logistica": [
+    [
+     "SP",
+     31
+    ],
+    [
+     "RJ",
+     10
+    ],
+    [
+     "CE",
+     10
+    ],
+    [
+     "RS",
+     10
+    ],
+    [
+     "MG",
+     9
+    ]
+   ]
+  }
+ ],
+ "skus": [
+  {
+   "sku": "APC-1067",
+   "produto": "Cond Ativ Anti-Frizz Cch Nutritivo 1000Ml",
+   "marca": "Ápice",
+   "conversas": 105,
+   "vazamento": 57,
+   "avaria": 28,
+   "personalizacao": 0,
+   "reacao": 0,
+   "faltando": 1,
+   "qualidade": 85
+  },
+  {
+   "sku": "GOC-2001",
+   "produto": "Case Personalizado iPhone 15 Pro Nome Glitter",
+   "marca": "Gocase",
+   "conversas": 221,
+   "vazamento": 0,
+   "avaria": 17,
+   "personalizacao": 29,
+   "reacao": 0,
+   "faltando": 30,
+   "qualidade": 46
+  },
+  {
+   "sku": "GOC-2003",
+   "produto": "Case Personalizado Galaxy S24 Iniciais",
+   "marca": "Gocase",
+   "conversas": 132,
+   "vazamento": 0,
+   "avaria": 9,
+   "personalizacao": 18,
+   "reacao": 0,
+   "faltando": 9,
+   "qualidade": 27
+  },
+  {
+   "sku": "GOC-2007",
+   "produto": "Porta-Cartão Personalizado Iniciais",
+   "marca": "Gocase",
+   "conversas": 119,
+   "vazamento": 0,
+   "avaria": 9,
+   "personalizacao": 14,
+   "reacao": 0,
+   "faltando": 13,
+   "qualidade": 23
+  },
+  {
+   "sku": "GOC-2002",
+   "produto": "Case Personalizado iPhone 16 Magsafe Foto",
+   "marca": "Gocase",
+   "conversas": 163,
+   "vazamento": 0,
+   "avaria": 5,
+   "personalizacao": 15,
+   "reacao": 0,
+   "faltando": 22,
+   "qualidade": 20
+  },
+  {
+   "sku": "GOC-2005",
+   "produto": "Squeeze Térmico Personalizado 500Ml Nome",
+   "marca": "Gocase",
+   "conversas": 103,
+   "vazamento": 0,
+   "avaria": 5,
+   "personalizacao": 15,
+   "reacao": 0,
+   "faltando": 12,
+   "qualidade": 20
+  },
+  {
+   "sku": "GOC-2010",
+   "produto": "Case Personalizado iPad 10ª Geração Nome",
+   "marca": "Gocase",
+   "conversas": 112,
+   "vazamento": 0,
+   "avaria": 1,
+   "personalizacao": 15,
+   "reacao": 0,
+   "faltando": 9,
+   "qualidade": 16
+  },
+  {
+   "sku": "GOC-2006",
+   "produto": "Copo Térmico Personalizado 473Ml",
+   "marca": "Gocase",
+   "conversas": 112,
+   "vazamento": 0,
+   "avaria": 5,
+   "personalizacao": 11,
+   "reacao": 0,
+   "faltando": 17,
+   "qualidade": 16
+  },
+  {
+   "sku": "GOC-2008",
+   "produto": "Case Personalizado AirPods Pro Nome",
+   "marca": "Gocase",
+   "conversas": 76,
+   "vazamento": 0,
+   "avaria": 8,
+   "personalizacao": 7,
+   "reacao": 0,
+   "faltando": 5,
+   "qualidade": 15
+  },
+  {
+   "sku": "GOC-2004",
+   "produto": "Case Personalizado Moto G84 Nome",
+   "marca": "Gocase",
+   "conversas": 101,
+   "vazamento": 0,
+   "avaria": 6,
+   "personalizacao": 8,
+   "reacao": 0,
+   "faltando": 16,
+   "qualidade": 14
+  },
+  {
+   "sku": "GOC-2009",
+   "produto": "Kit Necessaire Personalizado Nome",
+   "marca": "Gocase",
+   "conversas": 61,
+   "vazamento": 0,
+   "avaria": 4,
+   "personalizacao": 4,
+   "reacao": 0,
+   "faltando": 5,
+   "qualidade": 8
+  },
+  {
+   "sku": "APC-1183",
+   "produto": "Shampoo Af Ba 300 Ml",
+   "marca": "Ápice",
+   "conversas": 20,
+   "vazamento": 4,
+   "avaria": 1,
+   "personalizacao": 0,
+   "reacao": 1,
+   "faltando": 3,
+   "qualidade": 6
+  }
+ ],
+ "marcas": [
+  {
+   "marca": "Gocase",
+   "grupo": "Gocase",
+   "conversas": 1200,
+   "custo": 10926.0,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Barbour's",
+   "grupo": "GoBeauté",
+   "conversas": 731,
+   "custo": 6948.0,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Ápice",
+   "grupo": "GoBeauté",
+   "conversas": 709,
+   "custo": 6422.4,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Kokeshi",
+   "grupo": "GoBeauté",
+   "conversas": 500,
+   "custo": 4458.0,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Lescent",
+   "grupo": "GoBeauté",
+   "conversas": 317,
+   "custo": 2539.2,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Rituária",
+   "grupo": "GoBeauté",
+   "conversas": 237,
+   "custo": 2215.2,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Yenzah",
+   "grupo": "GoBeauté",
+   "conversas": 114,
+   "custo": 1113.6,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "By Samia",
+   "grupo": "GoBeauté",
+   "conversas": 126,
+   "custo": 910.8,
+   "principal_motivo": "Rastreio"
+  },
+  {
+   "marca": "Auá",
+   "grupo": "GoBeauté",
+   "conversas": 66,
+   "custo": 566.4,
+   "principal_motivo": "Rastreio"
+  }
+ ],
+ "auditoria": {
+  "violacoes": {
+   "reenvio_sem_foto": 429,
+   "segunda_demanda_ignorada": 335,
+   "sem_resposta_humana": 6,
+   "fragrancia_cupom_em_vez_de_troca": 145,
+   "endereco_prometido_apos_separacao": 115,
+   "cosmeto_sem_protocolo": 40
+  },
+  "aplicaveis": {
+   "cosmeto_sem_protocolo": 40,
+   "reenvio_sem_foto": 429,
+   "faltante_encerrado_sem_tratar": 429,
+   "fragrancia_cupom_em_vez_de_troca": 145,
+   "endereco_prometido_apos_separacao": 115,
+   "segunda_demanda_ignorada": 341,
+   "sem_resposta_humana": 3541
+  },
+  "exemplos": {
+   "reenvio_sem_foto": [
+    "CV920591",
+    "CV919301",
+    "CV912538",
+    "CV915923",
+    "CV918813"
+   ],
+   "segunda_demanda_ignorada": [
+    "CV920591",
+    "CV911374",
+    "CV917272",
+    "CV913032",
+    "CV913412"
+   ],
+   "sem_resposta_humana": [
+    "CV917978",
+    "CV916527",
+    "CV910879",
+    "CV917773",
+    "CV916427"
+   ],
+   "fragrancia_cupom_em_vez_de_troca": [
+    "CV916253",
+    "CV920539",
+    "CV922039",
+    "CV912408",
+    "CV917957"
+   ],
+   "endereco_prometido_apos_separacao": [
+    "CV911078",
+    "CV915907",
+    "CV912035",
+    "CV916630",
+    "CV910534"
+   ],
+   "cosmeto_sem_protocolo": [
+    "CV920357",
+    "CV921562",
+    "CV917032",
+    "CV915994",
+    "CV912361"
+   ]
+  },
+  "confusao_top": [
+   {
+    "agente": "Outros",
+    "ia": "Sem mensagem",
+    "conversas": 151
+   },
+   {
+    "agente": "Troca",
+    "ia": "Avaria",
+    "conversas": 36
+   },
+   {
+    "agente": "Cancelamento",
+    "ia": "Rastreio",
+    "conversas": 29
+   },
+   {
+    "agente": "Avaria",
+    "ia": "Rastreio",
+    "conversas": 27
+   },
+   {
+    "agente": "Outros",
+    "ia": "Avaria",
+    "conversas": 26
+   },
+   {
+    "agente": "Produto faltando",
+    "ia": "Rastreio",
+    "conversas": 22
+   },
+   {
+    "agente": "Financeiro",
+    "ia": "Rastreio",
+    "conversas": 21
+   },
+   {
+    "agente": "Reclamação produto",
+    "ia": "Rastreio",
+    "conversas": 20
+   },
+   {
+    "agente": "Elogio",
+    "ia": "Rastreio",
+    "conversas": 20
+   },
+   {
+    "agente": "Endereço",
+    "ia": "Rastreio",
+    "conversas": 20
+   }
+  ]
+ },
+ "politicas": {
+  "arrependimento": {
+   "titulo": "Arrependimento (CDC, art. 49)",
+   "texto": "Até 7 dias do recebimento, reembolso integral."
+  },
+  "avaria_faltante": {
+   "titulo": "Avaria, vazamento ou item faltante",
+   "texto": "Reenvio sem custo, mediante foto, em até 7 dias do recebimento."
+  },
+  "fragrancia": {
+   "titulo": "Troca por insatisfação com fragrância",
+   "texto": "1 troca por pedido, em até 30 dias, com no máximo 20% do produto utilizado."
+  },
+  "cobranca_duplicada": {
+   "titulo": "Cobrança duplicada",
+   "texto": "Estorno em até 2 faturas (cartão) ou 5 dias úteis (pix)."
+  },
+  "cosmetovigilancia": {
+   "titulo": "Reação adversa a cosmético ou suplemento",
+   "texto": "Orientar a suspensão do uso, registrar no protocolo de cosmetovigilância (produto, lote, descrição e fotos) em até 24 horas e encaminhar para a responsável técnica. A troca do produto não substitui o registro."
+  },
+  "endereco": {
+   "titulo": "Alteração de endereço",
+   "texto": "Possível somente antes da separação do pedido."
+  },
+  "personalizacao": {
+   "titulo": "Erro de personalização Gocase",
+   "texto": "Nome, foto ou iniciais diferentes do pedido, impressão borrada ou torta: nova produção sem custo, mediante foto, em até 7 dias do recebimento."
+  }
+ },
+ "premissas_roi": {
+  "eliminavel": 0.6,
+  "evitavel": 0.3,
+  "contencao_autonomo": 0.7,
+  "reducao_esforco_aprovacao": 0.4,
+  "nota": "Premissas conservadoras e ajustáveis no painel. Custos por contato vêm de parametros.md."
+ }
+}
