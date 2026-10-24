@@ -107,7 +107,7 @@ Para regerar esses JSONs, coloque os CSVs em `data/raw/` e rode o pipeline.
 
 ```bash
 python3 scripts/build_dataset.py   # regera public/data e api/_data a partir de data/raw (≈1 s)
-python3 server.py                  # http://localhost:8080
+python3 dev_server.py              # http://localhost:8080
 ```
 
 Para o modo LLM, crie um `.env` com `GROQ_API_KEY=...` (chave gratuita em console.groq.com). O modelo pode ser trocado com `GROQ_MODEL`, e `OPENAI_API_KEY` também funciona. No playground, dá para colar uma chave que fica só na memória da aba.
@@ -122,7 +122,7 @@ O `vercel.json` já está configurado. Os arquivos estáticos ficam em `public/`
 api/_engine.py         motor: classificação, políticas, 19 ferramentas, guardrails, agente de regras
 api/agent.py           função HTTP: agente LLM (tool calling), triagem, lote, status
 scripts/build_dataset.py  pipeline CSV → analytics.json, conversations.json, base do agente
-server.py              servidor local (estático + /api/agent)
+dev_server.py          servidor local (estático + /api/agent)
 public/                painel (index.html, styles.css, app.js, data/)
 data/raw/              CSVs do desafio (fora do repositório)
 ```

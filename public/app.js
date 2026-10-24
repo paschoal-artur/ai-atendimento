@@ -843,7 +843,7 @@ async function api(body) {
     const r = await fetch("/api/agent", { method: "POST", headers, body: JSON.stringify(body) });
     return await r.json();
   } catch (err) {
-    return { ok: false, error: "API do agente indisponível. Rode python3 server.py ou publique na Vercel." };
+    return { ok: false, error: "API do agente indisponível. Rode python3 dev_server.py ou publique na Vercel." };
   }
 }
 

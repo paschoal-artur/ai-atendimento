@@ -1,1 +1,0 @@
-# Zero external dependencies required — uses Python 3 standard library for fast cold starts on Vercel

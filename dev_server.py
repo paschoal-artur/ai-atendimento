@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Servidor local: serve public/ e a mesma API da Vercel (/api/agent).
-Uso: python3 server.py [porta]      (lê GROQ_API_KEY do ambiente ou de um arquivo .env)
+Uso: python3 dev_server.py [porta]      (lê GROQ_API_KEY do ambiente ou de um arquivo .env)
 """
 import gzip
 import json
