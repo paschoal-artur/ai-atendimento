@@ -347,6 +347,11 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .inbox-filters { padding: 12px; border-bottom: 1px solid var(--border); display: grid; gap: 8px; }
 .inbox-filters .row { flex-wrap: nowrap; }
 .inbox-filters .select { flex: 1; height: 30px; font-size: 12px; }
+.filter-top .input { flex: 1; min-width: 0; }
+.filters-more { display: grid; gap: 8px; }
+.filters-toggle, .back-btn { display: none; }
+.back-btn { justify-self: start; margin-left: -8px; }
+.back-btn svg { transform: rotate(180deg); }
 .inbox-count { font-size: 12px; color: var(--ink-3); padding: 8px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
 .conv-list { overflow-y: auto; flex: 1; }
 .conv-item { display: grid; gap: 4px; padding: 12px 14px; border-bottom: 1px solid var(--border); cursor: pointer; border-left: 3px solid transparent; width: 100%; text-align: left; background: none; border-top: 0; border-right: 0; }
@@ -476,6 +481,14 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
   .hero-number { font-size: 56px; }
   .inbox { grid-template-columns: 1fr; }
   .inbox-list { border-right: 0; }
+  /* Lista e conversa em telas separadas; a página rola, sem rolagem aninhada na lista */
+  .inbox .conv-list { max-height: none; overflow: visible; }
+  .inbox:not(.show-detail) .thread, .inbox:not(.show-detail) .agent, .inbox.show-detail .inbox-list { display: none; }
+  .inbox .thread-body { overflow: visible; }
+  .back-btn { display: inline-flex; }
+  /* Filtros: busca sempre visível, o resto recolhido atrás de um botão */
+  .filters-toggle { display: inline-flex; flex: none; }
+  .inbox-filters:not(.open) .filters-more { display: none; }
   .msg { max-width: 92%; }
   .rank-item { grid-template-columns: 28px minmax(0, 1fr); }
   .rank-score { grid-column: 2; text-align: left; }
