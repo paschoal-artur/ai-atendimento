@@ -4,6 +4,7 @@ Solução do **Problema 1 (Atendimento)** do Desafio AI-First GoGroup: um diagn�
 
 - **Painel:** 9 telas. São quatro perguntas do case, a fila de triagem, um playground do agente, causa raiz e qualidade/método.
 - **Agente:** LLM com tool calling (Groq `openai/gpt-oss-120b`) e 19 ferramentas. O modelo escolhe as ferramentas e redige a resposta, e as políticas ficam dentro das ferramentas, então ele não consegue aprovar o que a regra nega. Sem chave, um motor de regras executa as mesmas ferramentas, e o painel funciona sem login.
+- **Construído com Claude Code** como ferramenta principal: análise dos dados, pipeline, agente, painel e deploy.
 - **Stack:** Python 3 só com a biblioteca padrão (servidor local e função Vercel) e frontend em HTML/CSS/JS sem dependências.
 
 ## Números principais

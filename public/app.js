@@ -841,9 +841,12 @@ async function api(body) {
   if (S.llmKey) headers["X-LLM-Key"] = S.llmKey;
   try {
     const r = await fetch("/api/agent", { method: "POST", headers, body: JSON.stringify(body) });
-    return await r.json();
+    const txt = await r.text();
+    try { return JSON.parse(txt); }
+    catch (e) { return { ok: false, error: `O agente demorou a responder (HTTP ${r.status}). Tente de novo em alguns segundos.` }; }
   } catch (err) {
-    return { ok: false, error: "API do agente indisponível. Rode python3 dev_server.py ou publique na Vercel." };
+    const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+    return { ok: false, error: local ? "API do agente indisponível. Rode python3 dev_server.py." : "Sem conexão com o agente. Verifique a internet e tente de novo." };
   }
 }
 
