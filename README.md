@@ -1,4 +1,4 @@
-# Atendimento AI-First · Gocase & GoBeauté
+# GoGroup · Atendimento AI-First
 
 Solução do **Problema 1 (Atendimento)** do Desafio AI-First GoGroup: um diagnóstico das 4.000 conversas da amostra e um **agente operacional** que resolve a fila com ferramentas. O agente consulta o pedido, aplica a política, abre protocolo, cria reenvio e escala com fila, e as regras de negócio ficam no código, não no prompt.
 

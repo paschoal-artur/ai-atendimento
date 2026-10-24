@@ -1,5 +1,5 @@
 """
-Agente operacional de atendimento (Gocase & GoBeauté).
+Agente operacional de atendimento (GoGroup).
 
 POST /api/agent
   {"mode": "triage", "conversation_id": "CV910001"}                         -> conversa real da fila
@@ -66,7 +66,7 @@ def provedor(chave_header=None):
     return None
 
 
-SYSTEM_PROMPT = f"""Você é o agente de atendimento da Gocase e da GoBeauté (marcas Gocase, Barbour's, Ápice, Kokeshi, Lescent, Rituária, Yenzah, By Samia, Auá).
+SYSTEM_PROMPT = f"""Você é o agente de atendimento do GoGroup (marcas Gocase, Barbour's, Ápice, Kokeshi, Lescent, Rituária, Yenzah, By Samia, Auá).
 Seu trabalho é resolver a conversa usando as ferramentas, não apenas conversar.
 
 Roteiro obrigatório:

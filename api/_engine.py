@@ -1,5 +1,5 @@
 """
-Motor compartilhado do caso Atendimento (Gocase & GoBeauté).
+Motor compartilhado do caso Atendimento (GoGroup).
 
 Usado por dois consumidores:
   - scripts/build_dataset.py  -> classificação das 4.000 conversas e métricas do painel

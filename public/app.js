@@ -1057,10 +1057,22 @@ function parseHash() {
   const [r, qs] = h.split("?");
   return { route: VIEWS[r] ? r : "visao", params: new URLSearchParams(qs || "") };
 }
+// Navegação: abas principais no topo; seções com várias telas ganham uma segunda linha de abas.
+const SECOES = [
+  { t: "Visão geral", ids: ["visao"] },
+  { t: "Diagnóstico", ids: ["motivos", "prioridade", "evitaveis", "autonomia"] },
+  { t: "Fila de triagem", ids: ["fila"] },
+  { t: "Testar o agente", ids: ["playground"] },
+  { t: "Evidências", ids: ["causa", "qualidade"] },
+];
 function renderNav() {
-  $("#nav").innerHTML = ROUTES.map((g) => `<div class="nav-group"><div class="nav-label">${esc(g.group)}</div>
-    ${g.items.map((r) => `<a class="nav-link" href="#/${r.id}" ${S.route === r.id ? 'aria-current="page"' : ""}>${icon(r.i)}<span>${esc(r.t)}</span>${r.q ? `<span class="nav-q">P${r.q}</span>` : ""}</a>`).join("")}</div>`).join("");
-  $("#crumbs").innerHTML = `${S.route === "visao" ? "" : "Atendimento / "}<strong>${esc(routeTitle(S.route))}</strong>`;
+  const atual = SECOES.find((g) => g.ids.includes(S.route)) || SECOES[0];
+  $("#nav").innerHTML = SECOES.map((g) => `<a class="tab" href="#/${g.ids[0]}" ${g === atual ? 'aria-current="page"' : ""}>${esc(g.t)}</a>`).join("");
+  const sub = $("#subnav");
+  sub.classList.toggle("hidden", atual.ids.length < 2);
+  sub.innerHTML = atual.ids.length < 2 ? "" : `<div class="subtabs-inner">${atual.ids.map((id, i) =>
+    `<a class="subtab" href="#/${id}" ${S.route === id ? 'aria-current="page"' : ""}>${atual.t === "Diagnóstico" ? `<span class="subtab-n">${i + 1}</span>` : ""}${esc(routeTitle(id))}</a>`).join("")}</div>`;
+  $(".tab[aria-current]")?.scrollIntoView({ block: "nearest", inline: "nearest" });
 }
 function render() {
   const [view, draw] = VIEWS[S.route];
@@ -1070,24 +1082,6 @@ function render() {
   renderNav();
   if (draw) draw();
 }
-// Menu lateral: no celular abre por cima do conteúdo; no desktop recolhe e devolve a largura à tela.
-const MOBILE = matchMedia("(max-width: 860px)");
-function toggleNav() {
-  const btn = $("#menu-btn");
-  if (MOBILE.matches) {
-    const sb = $("#sidebar");
-    sb.classList.toggle("open");
-    btn.setAttribute("aria-expanded", sb.classList.contains("open"));
-    return;
-  }
-  const fechado = document.documentElement.classList.toggle("nav-collapsed");
-  btn.setAttribute("aria-expanded", !fechado);
-  btn.setAttribute("aria-label", fechado ? "Mostrar menu" : "Recolher menu");
-  try { localStorage.setItem("nav", fechado ? "0" : "1"); } catch {}
-  const draw = VIEWS[S.route][1];
-  if (draw) draw();
-}
-
 // Animação de entrada: só na troca de tela, não em cada filtro. Respeita prefers-reduced-motion.
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)");
 let enterTimer;
@@ -1120,7 +1114,6 @@ async function onRoute() {
   if (route === "fila" && params.get("id")) { S.sel = params.get("id"); S.F = { q: "", canal: "", tag: "", aut: "", flag: "", sort: "prio" }; }
   render();
   if (changed) { window.scrollTo(0, 0); enter(); }
-  $("#sidebar").classList.remove("open");
   if (route === "fila" && !S.Q) {
     try {
       S.Q = await (await fetch("data/conversations.json")).json();
@@ -1160,7 +1153,6 @@ document.addEventListener("click", (e) => {
     render();
   } else if (t.id === "p-run") runPlay();
   else if (t.id === "theme-btn") toggleTheme();
-  else if (t.id === "menu-btn") toggleNav();
 });
 document.addEventListener("input", (e) => {
   const t = e.target;
@@ -1213,16 +1205,18 @@ addEventListener("hashchange", onRoute);
     $("#view").innerHTML = `<div class="callout callout-critical">${icon("octagon")}<div>Não foi possível carregar data/analytics.json. Rode <span class="kbd">python3 scripts/build_dataset.py</span>.</div></div>`;
     return;
   }
-  $("#data-stamp").innerHTML = `Base de ${esc(S.A.metadata.data_extracao)} · ${n0(S.A.metadata.conversas_amostra)} conversas<br><a href="${REPO_URL}" target="_blank" rel="noopener">Código no GitHub</a>`;
+  $("#data-stamp").innerHTML = `<span>GoGroup · Desafio AI-First, Problema 1</span><span>Base de ${esc(S.A.metadata.data_extracao)} · ${n0(S.A.metadata.conversas_amostra)} conversas</span><a href="${REPO_URL}" target="_blank" rel="noopener">Código no GitHub</a>`;
+  $("#gh-link").href = REPO_URL;
   await onRoute();
   enter();
   try {
     S.status = await (await fetch("/api/agent")).json();
     $("#llm-status").innerHTML = S.status.llm_disponivel
-      ? `<span class="dot on"></span><span>Agente LLM ativo · ${esc(S.status.modelo)}</span>`
-      : `<span class="dot off"></span><span>Agente em modo regras</span>`;
+      ? `<span class="dot on"></span><span>Agente LLM ativo</span>`
+      : `<span class="dot off"></span><span>Modo regras</span>`;
+    $("#llm-status").title = S.status.llm_disponivel ? `Modelo ${S.status.modelo} via ${S.status.provedor}` : "Sem chave de LLM: o motor de regras executa as ferramentas";
   } catch {
-    $("#llm-status").innerHTML = `<span class="dot"></span><span>API do agente offline</span>`;
+    $("#llm-status").innerHTML = `<span class="dot"></span><span>Agente offline</span>`;
   }
   if (S.route === "qualidade") render();
 })();
